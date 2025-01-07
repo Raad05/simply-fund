@@ -84,6 +84,11 @@ contract SimplyFund {
     }
 
     // read operations
+    function getDonators(uint _id) public view returns (address[] memory) {
+        Campaign memory campaign = campaigns[_id];
+
+        return campaign.donators;
+    }
 
     // modifiers
 }
