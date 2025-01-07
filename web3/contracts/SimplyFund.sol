@@ -29,10 +29,10 @@ contract SimplyFund {
     }
 
     // state variables
-    uint public totalCampaigns;
+    Campaign[] public campaigns;
 
     // mappings
-    mapping(uint => Campaign) public campaigns;
+    // mapping(uint => Campaign) public campaigns;
 
     // write operations
     function createCampaign(
@@ -58,12 +58,13 @@ contract SimplyFund {
             "Please enter a valid deadline."
         );
 
-        campaigns[totalCampaigns] = newCampaign;
+        campaigns.push(newCampaign);
 
-        uint campaignID = totalCampaigns;
-        totalCampaigns++;
-
-        emit CampaignCreated(campaignID, msg.sender, newCampaign.title);
+        emit CampaignCreated(
+            campaigns.length - 1,
+            msg.sender,
+            newCampaign.title
+        );
 
         return true;
     }
